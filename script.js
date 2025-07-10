@@ -94,44 +94,54 @@ function pauseMusic() {
     music.pause();
 }
 
-function loadMusic(song, direction = 1) {
+function loadMusic(song, direction = 0) {
+    // Remove any previous animation classes
     image.classList.remove('slide-out-left', 'slide-in-right', 'slide-out-right', 'slide-in-left');
     background.classList.remove('slide-out-left', 'slide-in-right', 'slide-out-right', 'slide-in-left');
 
     if (direction === 1) {
         image.classList.add('slide-out-left');
         background.classList.add('slide-out-left');
-    } else {
+    } else if (direction === -1) {
         image.classList.add('slide-out-right');
         background.classList.add('slide-out-right');
     }
 
-    setTimeout(() => {
+    if (direction === 1 || direction === -1) {
+        setTimeout(() => {
+            music.src = song.path;
+            title.textContent = song.displayName;
+            artist.textContent = song.artist;
+            image.src = song.cover;
+            background.src = song.cover;
+
+            image.classList.remove('slide-out-left', 'slide-out-right');
+            background.classList.remove('slide-out-left', 'slide-out-right');
+            if (direction === 1) {
+                image.classList.add('slide-in-right');
+                background.classList.add('slide-in-right');
+            } else if (direction === -1) {
+                image.classList.add('slide-in-left');
+                background.classList.add('slide-in-left');
+            }
+
+            setTimeout(() => {
+                image.classList.remove('slide-in-right', 'slide-in-left');
+                background.classList.remove('slide-in-right', 'slide-in-left');
+            }, 400);
+
+            if (isPlaying) {
+                playMusic();
+            }
+        }, 400);
+    } else {
+        // No animation, just load immediately
         music.src = song.path;
         title.textContent = song.displayName;
         artist.textContent = song.artist;
         image.src = song.cover;
         background.src = song.cover;
-
-        image.classList.remove('slide-out-left', 'slide-out-right');
-        background.classList.remove('slide-out-left', 'slide-out-right');
-        if (direction === 1) {
-            image.classList.add('slide-in-right');
-            background.classList.add('slide-in-right');
-        } else {
-            image.classList.add('slide-in-left');
-            background.classList.add('slide-in-left');
-        }
-
-        setTimeout(() => {
-            image.classList.remove('slide-in-right', 'slide-in-left');
-            background.classList.remove('slide-in-right', 'slide-in-left');
-        }, 400);
-
-        if (isPlaying) {
-            playMusic();
-        }
-    }, 400); 
+    }
 }
 
 function changeMusic(direction){
