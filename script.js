@@ -1,3 +1,39 @@
+// // navbar
+// function openNav() {
+//     document.getElementById("mySidenav").classList.add("open");
+//     document.getElementById("main").classList.add("shifted");
+// }
+
+// function closeNav() {
+//     document.getElementById("mySidenav").classList.remove("open");
+//     document.getElementById("main").classList.remove("shifted");
+// }
+
+// // search bar
+// const playlists = [];
+
+// const searchInput = document.getElementById('search');
+// const searchResults = document.getElementById('search-results');
+
+// function renderSearchResults(results) {
+//     if (playlists.length === 0) {
+//         searchResults.textContent = "You have no playlists, make one!";
+//     } else if (results.length === 0) {
+//         searchResults.textContent = "No playlists found.";
+//     } else {
+//         searchResults.innerHTML = results.map(pl => `<div>${pl.name}</div>`).join('');
+//     }
+// }
+// searchInput.addEventListener('input', function(){
+//     const query = this.value.toLowerCase();
+//     const filtered = playlists.filter(pl => pl.name.toLowerCase().includes(query));
+//     renderSearchResults(filtered);
+// });
+
+// renderSearchResults(playlists);
+
+// music player
+
 const image = document.getElementById('cover'),
     title = document.getElementById('music-title'),
     artist = document.getElementById('music-artist'),
